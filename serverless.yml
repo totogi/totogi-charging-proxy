@@ -1,0 +1,32 @@
+service: totogi-charging-proxy
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: us-west-2
+  profile: igotot-wireless
+  environment:
+    INIT_URL: ${ssm(us-west-2):/INIT_URL}
+  runtime: python3.8
+  httpApi:
+    cors: true
+
+functions:
+  proxyCharging:
+    handler: src/proxy.handler
+    events:
+      - httpApi:
+          path: /
+          method: post
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+package:
+  patterns:
+    - '!venv/**'
+    - '!node_modules/**'
