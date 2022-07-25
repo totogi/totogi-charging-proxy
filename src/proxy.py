@@ -4,7 +4,7 @@ import httpx
 
 from src.utils import headers, INIT_URL
 
-client = httpx.Client(http2=True)
+client = httpx.Client(http2=True, verify=False)
 
 # Decimal Bug Fix: https://stackoverflow.com/questions/63278737/object-of-type-decimal-is-not-json-serializable
 class DecimalEncoder(json.JSONEncoder):
