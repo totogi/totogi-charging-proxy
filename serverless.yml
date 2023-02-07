@@ -9,6 +9,13 @@ provider:
     INIT_URL: ${ssm(us-west-2):/INIT_URL}
   runtime: python3.8
   httpApi:
+    authorizers:
+      cognitoUserPoolCcb:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_bYrFO4DaR
+        audience:
+          - 3bsr3p2j5ffn1cf05knuqc03v2
     cors: true
 
 functions:
