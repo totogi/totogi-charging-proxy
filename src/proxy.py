@@ -20,7 +20,7 @@ def handler(event, context):
     requestData = body['requestData']
     idToken = body['token']
     url = body['url']
-    if INIT_URL in url:
+    if ("https://5g.prodapsoutheast1.api.totogi.com/nchf-convergedcharging/v3/chargingData" in url) or ("https://5g.produseast1.api.totogi.com/nchf-convergedcharging/v3/chargingData" in url):
         response = client.post(
             url=url,
             json=requestData,
